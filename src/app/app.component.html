@@ -12,7 +12,14 @@
             formControlName="username">
             <span 
             *ngIf="!signupform.get('userData.username')?.valid && signupform.get('userData.username')?.touched"
-            class="help-block">Please Enter a Valid Username</span>
+            class="help-block">
+            <span *ngIf="signupform.get('userData.username').errors['nameIsForbidden']">
+              This name is invalid
+            </span>
+            <span *ngIf="signupform.get('userData.username').errors['required']">
+              This field is required
+            </span>
+          </span>
         </div>
         <div class="form-group">
           <label for="email">email</label>
@@ -31,9 +38,6 @@
             <input
               type="radio" formControlName="gender"
               [value]="gender">{{ gender }}
-              <span 
-            *ngIf="!signupform.get('gender')?.valid && signupform.get('gender')?.touched"
-            class="help-block">Please Enter a Valid Gender</span>
           </label>
         </div>
         <div formArrayName="hobbies">
@@ -47,6 +51,9 @@
         </div>
         </div>
         
+        <span
+          *ngIf="!signupform.valid && signupform.touched"
+          class="help-block">Please enter valid data!</span>
         <button class="btn btn-primary" type="submit">Submit</button>
         
       </form>
