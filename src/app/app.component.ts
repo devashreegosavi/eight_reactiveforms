@@ -27,7 +27,23 @@ export class AppComponent implements OnInit{
        (value) => console.log(value)
      );*/
 
-     this.signupform.statusChanges.subscribe((status) => console.log(status));
+     //this.signupform.statusChanges.subscribe((status) => console.log(status));
+
+     /*this.signupform.setValue({
+      userData: {
+        username: 'Max',
+        email: 'max@test.com',
+      },
+      gender: 'male',
+      hobbies: [],
+    });*/
+
+    this.signupform.patchValue({
+      userData : {
+        username : 'Anna'
+      }
+    })
+
   }
 
   get hobbyControls() {
@@ -36,6 +52,7 @@ export class AppComponent implements OnInit{
 
   onSubmit(){
     console.log(this.signupform);
+    this.signupform.reset();
   }
   onAddHobby(){
     const control = new FormControl(null,Validators.required);
